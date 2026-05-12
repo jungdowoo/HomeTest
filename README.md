@@ -176,9 +176,7 @@ http://localhost:3000
 
 ```env
 APPLY_HOME_SERVICE_KEY=공공데이터포털_청약홈_API_인증키
-APPLY_HOME_API_BASE_URL=https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
-NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-0000000000000000
+
 ```
 
 ## 9. 테스트 방법
@@ -229,7 +227,6 @@ AI 호출은 기본 동작이 아닙니다.
 - 실제 경쟁률/분양가/입지 지표와 추천 엔진 결합
 - 사용자 저장 기능과 비교 리포트
 
-## 13. 면접에서 어필할 포인트
 
 ### 1. 단순한 AI 챗봇이 아니라는 점
 
