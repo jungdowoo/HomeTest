@@ -258,3 +258,20 @@ AI 호출을 버튼식으로 분리하고 provider 구조를 둬서, 기능 품�
 - Next.js production build 통과
 - 청약홈 API 구조 반영
 - SEO/AdSense 준비 페이지 포함
+
+## 15. 배포 전 체크리스트
+
+- `NEXT_PUBLIC_SITE_URL`을 실제 운영 도메인으로 교체
+- `APPLY_HOME_SERVICE_KEY`를 배포 환경변수에 등록
+- `NEXT_PUBLIC_ADSENSE_CLIENT`를 실제 `ca-pub-*` 값으로 교체
+- `public/ads.txt`의 게시자 ID를 실제 값으로 수정
+- Google Search Console에 사이트 등록 후 `sitemap.xml` 제출
+- 배포 환경에서 `/api/apartments`, `/api/explain`, `/blog/*` 라우트 정상 동작 확인
+
+## 16. 면접 데모 시나리오
+
+1. 메인 화면에서 청약 중인 단지 목록과 서비스 목적을 빠르게 소개합니다.
+2. 시뮬레이터에서 `무주택 기간 1년`, `기혼`, `혼인 3년`, `청약통장 보유` 조건을 입력합니다.
+3. 결과 화면에서 신혼부부 특별공급이 상위 추천으로 올라오고, “무주택 기간이 짧아 특별공급을 우선 검토”하는 전략 메모가 생성되는 흐름을 설명합니다.
+4. AI 쉬운 설명 버튼을 눌러, AI가 직접 판정하지 않고 Rule Engine 결과만 설명한다는 구조를 보여줍니다.
+5. 마지막으로 테스트 코드와 README를 열어, 제품 기능뿐 아니라 설계 판단과 검증까지 했다는 점을 강조합니다.
