@@ -176,9 +176,7 @@ http://localhost:3000
 
 ```env
 APPLY_HOME_SERVICE_KEY=공공데이터포털_청약홈_API_인증키
-APPLY_HOME_API_BASE_URL=https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
-NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-0000000000000000
+
 ```
 
 ## 9. 테스트 방법
