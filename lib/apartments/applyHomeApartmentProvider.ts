@@ -58,6 +58,29 @@ function housingTypeFromRow(row: ApplyHomeRow): HousingType {
   return "private_sale";
 }
 
+function resolveHouseSecd(row: ApplyHomeRow) {
+  const directCode = stringValue(row, "HOUSE_SECD") || stringValue(row, "HOUSE_SECD_CD");
+  if (directCode) return directCode;
+
+  const houseName = `${stringValue(row, "HOUSE_SECD_NM")} ${stringValue(row, "HOUSE_DTL_SECD_NM")} ${stringValue(row, "HOUSE_NM")}`;
+  if (houseName.includes("공공지원민간임대") || houseName.includes("민간임대")) return "03";
+  return "02";
+}
+
+function buildOfficialAnnouncementUrl(row: ApplyHomeRow) {
+  const houseManageNo = stringValue(row, "HOUSE_MANAGE_NO");
+  const pblancNo = stringValue(row, "PBLANC_NO");
+  if (!houseManageNo || !pblancNo) return "";
+
+  const houseSecd = resolveHouseSecd(row);
+
+  const url = new URL("https://www.applyhome.co.kr/ai/aia/selectPRMOLttotPblancDetailView.do");
+  url.searchParams.set("houseManageNo", houseManageNo);
+  url.searchParams.set("houseSecd", houseSecd);
+  url.searchParams.set("pblancNo", pblancNo);
+  return url.toString();
+}
+
 function availableSupplyTypesFromRow(row: ApplyHomeRow): SupplyType[] {
   const hasSpecialDate = Boolean(stringValue(row, "SPSPLY_RCEPT_BGNDE") || stringValue(row, "SPSPLY_RCEPT_ENDDE"));
   const supplyTypes: SupplyType[] = ["general_supply"];
@@ -108,6 +131,7 @@ export function normalizeApplyHomeApartment(row: ApplyHomeRow): ApartmentOfferin
     ruleVersion: "applyhome-api-2026.05",
     sourceNote: "한국부동산원 청약홈 분양정보 조회 서비스 API에서 조회한 데이터입니다.",
     disclaimer: "API 데이터는 참고용이며 실제 청약 가능 여부와 일정은 반드시 청약홈 및 모집공고문에서 확인해야 합니다.",
+    officialAnnouncementUrl: buildOfficialAnnouncementUrl(row),
   };
 }
 

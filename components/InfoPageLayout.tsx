@@ -56,14 +56,26 @@ export function InfoPageLayout({ title, subtitle, children }: InfoPageLayoutProp
         </div>
       </nav>
 
-      <main className="mx-auto max-w-4xl px-8 py-20">
+      <main className="mx-auto max-w-5xl px-6 py-16 md:px-8 md:py-20">
         <header className="mb-16">
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-cyan-400">{subtitle}</p>
-          <h1 className="mt-6 text-5xl font-black tracking-tight md:text-6xl">{title}</h1>
+          <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">{title}</h1>
           <div className="mt-10 h-1 w-20 bg-cyan-500" />
         </header>
 
-        <section className={`prose prose-slate max-w-none ${isLight ? "" : "prose-invert"}`}>
+        <section
+          className={[
+            "prose prose-slate max-w-none",
+            "prose-h2:mt-14 prose-h2:text-2xl prose-h2:font-black prose-h2:tracking-tight prose-h2:text-white",
+            "prose-h3:mt-10 prose-h3:text-xl prose-h3:font-black prose-h3:text-white",
+            "prose-p:my-5 prose-p:text-[16px] prose-p:leading-8 prose-p:text-slate-300",
+            "prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline",
+            "prose-strong:text-white",
+            "prose-ul:my-6 prose-ul:space-y-3 prose-li:my-0 prose-li:leading-8",
+            "prose-blockquote:border-cyan-400 prose-blockquote:bg-white/[0.03] prose-blockquote:px-5 prose-blockquote:py-4 prose-blockquote:text-slate-200",
+            isLight ? "" : "prose-invert",
+          ].join(" ")}
+        >
           {children}
         </section>
 

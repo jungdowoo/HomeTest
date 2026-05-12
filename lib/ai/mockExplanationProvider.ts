@@ -40,6 +40,13 @@ export class MockExplanationProvider implements ExplanationProvider {
       ? `차선으로는 ${second.label}을 함께 검토할 수 있으며, 추천 적합도는 '${matchLabels[second.matchLevel]}'입니다.`
       : "현재 단지에서는 추가로 비교할 만한 전형이 많지 않습니다.";
 
-    return `${apartment.apartmentName} 기준으로는 ${top.label}이 1순위 추천 전형입니다. 추천 적합도는 '${matchLabels[top.matchLevel]}'입니다. ${top.rankReason} 주요 이유는 ${reasons} ${strategyText} ${warningText} ${competitionText} ${nextBest} 추천 적합도는 청약 가점이 아니라 입력 조건과 단지 공급 유형을 비교한 내부 정렬 기준입니다. 이 설명은 참고용이며 실제 청약 가능 여부와 경쟁률은 청약홈 및 모집공고문 기준을 확인해야 합니다.`;
+    return [
+      `1순위 추천: ${apartment.apartmentName} 기준으로는 ${top.label}이 가장 먼저 볼 전형입니다. 추천 적합도는 '${matchLabels[top.matchLevel]}'입니다.`,
+      `추천 이유: ${top.rankReason} 주요 이유는 ${reasons} ${strategyText}`,
+      `주의사항: ${warningText}`,
+      `예상 경쟁도: ${competitionText}`,
+      `다음 검토안: ${nextBest}`,
+      `참고: 추천 적합도는 청약 가점이 아니라 입력 조건과 단지 공급 유형을 비교한 내부 정렬 기준입니다. 실제 청약 가능 여부와 경쟁률은 청약홈 및 모집공고문 기준을 확인해야 합니다.`,
+    ].join("\n\n");
   }
 }

@@ -32,7 +32,7 @@ export interface ApplicantProfile {
   currentRegion: string;
   desiredRegion: string;
   desiredDistrict: string;
-  preferredHousingType: HousingType;
+  preferredHousingType: HousingType | "";
   interestedSupplyTypes: SupplyType[];
 }
 

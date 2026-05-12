@@ -26,8 +26,8 @@ const defaultProfile: ApplicantProfile = {
   currentRegion: "경기도",
   desiredRegion: "경기도",
   desiredDistrict: "하남시",
-  preferredHousingType: "public_sale",
-  interestedSupplyTypes: ["newlywed_special", "first_life_special", "general_supply"],
+  preferredHousingType: "",
+  interestedSupplyTypes: [],
 };
 
 function numberOrNull(value: string) {
@@ -86,17 +86,16 @@ export function EligibilityForm({
 
   useEffect(() => {
     if (!availableApartments.some((apartment) => apartment.apartmentId === apartmentId)) {
-      const nextApartment = availableApartments[0];
-      if (nextApartment) {
-        setApartmentId(nextApartment.apartmentId);
-        setProfile((previous) => ({
-          ...previous,
-          desiredRegion: nextApartment.region,
-          desiredDistrict: nextApartment.district,
-          preferredHousingType: nextApartment.housingType,
-        }));
+        const nextApartment = availableApartments[0];
+        if (nextApartment) {
+          setApartmentId(nextApartment.apartmentId);
+          setProfile((previous) => ({
+            ...previous,
+            desiredRegion: nextApartment.region,
+            desiredDistrict: nextApartment.district,
+          }));
+        }
       }
-    }
   }, [apartmentId, availableApartments]);
 
   function update<K extends keyof ApplicantProfile>(field: K, value: ApplicantProfile[K]) {

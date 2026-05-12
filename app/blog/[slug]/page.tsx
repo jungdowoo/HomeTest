@@ -41,20 +41,18 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <InfoPageLayout title={post.title} subtitle={post.category}>
-      <div className="mb-12 flex flex-wrap items-center gap-4 text-xs font-bold text-slate-500">
-        <span>작성일: {post.date}</span>
-        <span className="h-1 w-1 rounded-full bg-slate-700" />
-        <span>분류: {post.category}</span>
-        <span className="h-1 w-1 rounded-full bg-slate-700" />
-        <span>{post.readingMinutes}분 읽기</span>
+      <div className="mb-12 flex flex-wrap items-center gap-3 text-xs font-bold text-slate-500">
+        <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1">작성일 {post.date}</span>
+        <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1">분류 {post.category}</span>
+        <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1">{post.readingMinutes}분 읽기</span>
       </div>
 
-      <div className="mb-12 rounded-3xl border border-amber-400/20 bg-amber-400/10 p-6 text-sm leading-7 text-amber-100">
+      <div className="mb-12 rounded-3xl border border-amber-400/20 bg-amber-400/10 p-8 text-sm leading-8 text-amber-50">
         이 글은 청약 정보 탐색을 돕기 위한 참고용 콘텐츠입니다. 실제 신청 가능 여부와 세부 기준은 반드시 청약홈 및 해당 단지 모집공고문을 확인해야 합니다.
       </div>
 
-      <div
-        className="blog-content prose prose-slate prose-invert max-w-none prose-h2:mt-12 prose-h2:text-2xl prose-h2:font-black prose-h2:text-white prose-p:text-slate-300 prose-p:leading-8"
+      <article
+        className="blog-content mx-auto max-w-3xl"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
 

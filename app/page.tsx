@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { AiExplanationBox } from "@/components/AiExplanationBox";
 import { Disclaimer } from "@/components/Disclaimer";
 import { EligibilityForm } from "@/components/EligibilityForm";
@@ -10,6 +11,7 @@ import type { ApplicantProfile } from "@/lib/eligibility/types";
 import { supplyTypeLabels } from "@/lib/eligibility/types";
 import { createRecommendations, type RecommendationResult } from "@/lib/recommendation/recommendationEngine";
 import { formatSupplyTypes, housingTypeLabels, recruitmentStatusLabels } from "@/lib/utils/format";
+import { blogPosts } from "@/lib/blog/posts";
 
 const architecture = [
   "사용자 조건 입력",
@@ -22,6 +24,7 @@ const architecture = [
 const filterTabs = ["전체", "접수 중", "모집 예정"] as const;
 
 type FilterTab = (typeof filterTabs)[number];
+const recentGuides = blogPosts.slice(-5).reverse();
 
 export default function Home() {
   const [profile, setProfile] = useState<ApplicantProfile | null>(null);
@@ -108,7 +111,7 @@ export default function Home() {
             <p className="slide-kicker">Rule Engine + AI Explanation</p>
             <h1 className={`text-6xl font-black leading-[1.1] tracking-tight md:text-8xl ${theme === "light" ? "text-slate-950" : "text-white"}`}>
               청약 판단을
-              <span className="block bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">전략 추천으로.</span>
+              <span className="block bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">전략 추천으로</span>
             </h1>
             <p className={`mt-10 max-w-xl text-lg font-medium leading-relaxed ${theme === "light" ? "text-slate-600" : "text-slate-400"}`}>
               사용자가 입력한 조건과 선택한 단지를 기준으로 가능한 전형을 분류하고, 무주택 기간·혼인 기간·자녀 수·통장 조건까지 반영해 어떤 전형을 먼저 볼지 추천합니다.
@@ -169,7 +172,7 @@ export default function Home() {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {filteredApartments.map((apartment) => (
                 <article key={apartment.apartmentId} className="slide-panel group p-1">
-                  <div className="inner-panel h-full p-8 transition-all hover:bg-slate-800/60">
+                  <div className="inner-panel block h-full p-8 transition-all hover:bg-slate-800/60">
                     <span className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-widest ring-1 ${
                       apartment.recruitmentStatus === "open"
                         ? "bg-cyan-500/10 text-cyan-400 ring-cyan-500/20"
@@ -183,6 +186,32 @@ export default function Home() {
                       <p>{housingTypeLabels[apartment.housingType]}</p>
                       <p>{apartment.applicationStartDate || "일정 확인 필요"} ~ {apartment.applicationEndDate || "일정 확인 필요"}</p>
                       <p className="line-clamp-2 text-xs">{formatSupplyTypes(apartment.availableSupplyTypes)}</p>
+                    </div>
+
+                    <div className="mt-8 space-y-3">
+                      {apartment.officialAnnouncementUrl ? (
+                        <a
+                          href={`/go/${apartment.apartmentId}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex w-full items-center justify-between rounded-2xl bg-cyan-500 px-4 py-3 text-sm font-black text-slate-950 shadow-lg shadow-cyan-500/30 transition hover:bg-cyan-400"
+                        >
+                          <span>청약홈 공식 모집공고문</span>
+                          <span aria-hidden="true">↗</span>
+                        </a>
+                      ) : (
+                        <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-black text-slate-300">
+                          데모 단지라 공식 모집공고문이 없습니다.
+                        </div>
+                      )}
+
+                      <Link
+                        href={`/apartments/${apartment.apartmentId}`}
+                        className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-black text-white transition hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-300"
+                      >
+                        <span>앱 내 상세 보기</span>
+                        <span aria-hidden="true">→</span>
+                      </Link>
                     </div>
                   </div>
                 </article>
@@ -206,6 +235,37 @@ export default function Home() {
         </div>
       </section>
 
+      <section className={`slide-section px-8 py-32 transition-colors duration-500 ${theme === "light" ? "bg-slate-100" : "bg-slate-950"}`}>
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <p className="slide-kicker">Latest Guides</p>
+              <h2 className={`text-5xl font-black tracking-tight md:text-6xl ${theme === "light" ? "text-slate-950" : "text-white"}`}>최근 가이드 글</h2>
+              <p className="mt-6 max-w-2xl font-medium text-slate-500">검색 유입과 실제 사용자 탐색을 함께 고려해, 자주 헷갈리는 청약 전략을 글로 정리했습니다.</p>
+            </div>
+            <a href="/blog" className="rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-sm font-black text-white backdrop-blur-sm transition hover:bg-white/10">
+              전체 글 보기
+            </a>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {recentGuides.map((post) => (
+              <a key={post.slug} href={`/blog/${post.slug}`} className="slide-panel group p-1">
+                <article className="inner-panel h-full p-8 transition-all hover:bg-slate-800/60">
+                  <div className="flex flex-wrap items-center gap-3 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                    <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-cyan-400 ring-1 ring-cyan-500/20">{post.category}</span>
+                    <span>{post.date}</span>
+                  </div>
+                  <h3 className="mt-6 text-2xl font-black leading-tight group-hover:text-cyan-400">{post.title}</h3>
+                  <p className="mt-5 text-sm leading-7 text-slate-400">{post.excerpt}</p>
+                  <div className="mt-8 text-[10px] font-black uppercase tracking-widest text-cyan-400">자세히 읽기</div>
+                </article>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {result && profile && (
         <section id="results" className={`slide-section px-8 py-32 transition-colors duration-500 ${theme === "light" ? "bg-slate-50" : "bg-[#020617]"}`}>
           <div className="mx-auto max-w-7xl">
@@ -226,7 +286,21 @@ export default function Home() {
               <div className="flex flex-wrap items-center gap-6 rounded-3xl border border-white/10 bg-slate-900/40 p-6 backdrop-blur-xl">
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Selected Apartment</p>
-                  <h3 className="mt-2 text-xl font-black">{result.apartment.apartmentName}</h3>
+                  {result.apartment.officialAnnouncementUrl ? (
+                    <a
+                      href={`/go/${result.apartment.apartmentId}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-2 inline-flex items-center gap-2 rounded-2xl bg-cyan-500 px-4 py-3 text-xl font-black text-slate-950 shadow-lg shadow-cyan-500/30 transition hover:bg-cyan-400"
+                    >
+                      {result.apartment.apartmentName}
+                      <span aria-hidden="true" className="text-base">↗</span>
+                    </a>
+                  ) : (
+                    <Link href={`/apartments/${result.apartment.apartmentId}`} className="mt-2 block text-xl font-black hover:text-cyan-400">
+                      {result.apartment.apartmentName}
+                    </Link>
+                  )}
                 </div>
                 <div className="h-10 w-[1px] bg-white/10 max-md:hidden" />
                 <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-slate-400">

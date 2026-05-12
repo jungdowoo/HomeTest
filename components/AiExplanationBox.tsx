@@ -54,7 +54,26 @@ export function AiExplanationBox({
                 <div className="h-2 w-2 animate-pulse rounded-full bg-cyan-500" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-cyan-500">Explanation Report</span>
               </div>
-              <p className="text-[15px] font-medium leading-8 text-slate-200">{explanation}</p>
+              <div className="space-y-4 text-[15px] font-medium leading-7 text-slate-200">
+                {explanation
+                  .split(/\n\s*\n/)
+                  .filter(Boolean)
+                  .map((paragraph) => {
+                    const [head, ...rest] = paragraph.split(": ");
+                    const hasLabel = rest.length > 0 && /^(1순위 추천|추천 이유|주의사항|예상 경쟁도|다음 검토안|참고)$/.test(head);
+
+                    if (!hasLabel) {
+                      return <p key={paragraph} className="text-pretty whitespace-pre-wrap">{paragraph}</p>;
+                    }
+
+                    return (
+                      <div key={paragraph} className="rounded-2xl border border-white/5 bg-white/[0.03] p-4">
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-cyan-400">{head}</p>
+                        <p className="mt-3 whitespace-pre-wrap text-pretty text-slate-200">{rest.join(": ")}</p>
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           </div>
         )}

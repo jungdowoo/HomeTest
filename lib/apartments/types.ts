@@ -16,6 +16,7 @@ export interface ApartmentOffering {
   ruleVersion: string;
   sourceNote: string;
   disclaimer: string;
+  officialAnnouncementUrl?: string;
 }
 
 export interface ApartmentListResponse {
