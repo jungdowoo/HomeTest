@@ -116,6 +116,9 @@ export default function Home() {
             <p className={`mt-10 max-w-xl text-lg font-medium leading-relaxed ${theme === "light" ? "text-slate-600" : "text-slate-400"}`}>
               사용자가 입력한 조건과 선택한 단지를 기준으로 가능한 전형을 분류하고, 무주택 기간·혼인 기간·자녀 수·통장 조건까지 반영해 어떤 전형을 먼저 볼지 추천합니다.
             </p>
+            <p className={`mt-5 max-w-xl text-sm leading-7 ${theme === "light" ? "text-slate-500" : "text-slate-400"}`}>
+              이 서비스는 단순한 청약 계산기가 아닙니다. 룰 엔진이 먼저 가능·주의·불가를 계산하고, 추천 엔진이 단지별 공급 유형과 조건을 함께 읽은 뒤, AI가 그 결과를 쉽게 설명합니다.
+            </p>
             <div className="mt-12 flex flex-wrap gap-4">
               <a href="#apartments" className="primary-button inline-flex items-center gap-2">현재 청약 단지 보기</a>
               <a href="#simulator" className="rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-sm font-black text-white backdrop-blur-sm transition hover:bg-white/10">조건 입력하기</a>
@@ -135,6 +138,27 @@ export default function Home() {
               </div>
               <p className="text-xs font-bold leading-6 text-slate-500">AI는 자격을 직접 판정하지 않고, 룰 엔진이 계산한 결과를 쉬운 문장으로 설명합니다.</p>
             </div>
+          </div>
+        </div>
+
+        <div className="mx-auto grid max-w-7xl gap-4 px-8 pb-20 md:grid-cols-3">
+          <div className={`rounded-3xl border p-6 ${theme === "light" ? "border-slate-200 bg-white/80" : "border-white/10 bg-white/[0.04]"}`}>
+            <h2 className="text-sm font-black uppercase tracking-[0.2em] text-cyan-400">What it does</h2>
+            <p className={`mt-4 text-sm leading-7 ${theme === "light" ? "text-slate-600" : "text-slate-400"}`}>
+              청약홈 API와 데모 데이터를 함께 보여주고, 사용자의 조건에 맞는 전형을 빠르게 좁혀 줍니다. “지금 어떤 전형을 먼저 봐야 하나”를 정리해 주는 정보 도구입니다.
+            </p>
+          </div>
+          <div className={`rounded-3xl border p-6 ${theme === "light" ? "border-slate-200 bg-white/80" : "border-white/10 bg-white/[0.04]"}`}>
+            <h2 className="text-sm font-black uppercase tracking-[0.2em] text-cyan-400">What to trust</h2>
+            <p className={`mt-4 text-sm leading-7 ${theme === "light" ? "text-slate-600" : "text-slate-400"}`}>
+              화면의 가능·주의·불가 상태는 룰 엔진 계산 결과입니다. 실제 신청 가능 여부는 항상 청약홈과 모집공고문을 우선해야 합니다.
+            </p>
+          </div>
+          <div className={`rounded-3xl border p-6 ${theme === "light" ? "border-slate-200 bg-white/80" : "border-white/10 bg-white/[0.04]"}`}>
+            <h2 className="text-sm font-black uppercase tracking-[0.2em] text-cyan-400">What to read next</h2>
+            <p className={`mt-4 text-sm leading-7 ${theme === "light" ? "text-slate-600" : "text-slate-400"}`}>
+              가이드, FAQ, 그리고 “왜 AI가 직접 판정하지 않는가” 글을 먼저 보면 구조가 빨리 잡힙니다. 그다음 단지와 결과를 보면 훨씬 자연스럽게 읽힙니다.
+            </p>
           </div>
         </div>
       </section>
@@ -228,10 +252,55 @@ export default function Home() {
               <p className="slide-kicker">Simulator</p>
               <h2 className={`text-5xl font-black tracking-tight md:text-6xl ${theme === "light" ? "text-slate-950" : "text-white"}`}>자격 시뮬레이션</h2>
               <p className="mt-6 font-medium text-slate-500">조건을 입력하면 단지별 가능한 전형과 추천 우선순위를 계산합니다.</p>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-500">
+                입력값이 일부 비어 있어도 결과는 나오지만, 소득·자산·통장·지역 조건이 정확할수록 추천 이유가 더 선명해집니다. 공고별 세부 조건은 별도로 확인해야 하므로 결과를 최종 판단 대신 출발점으로 사용하세요.
+              </p>
             </div>
             <div className="md:w-1/3"><Disclaimer /></div>
           </div>
           <EligibilityForm apartments={apartments} onSubmit={handleCalculate} />
+        </div>
+      </section>
+
+      <section className={`slide-section px-8 py-28 transition-colors duration-500 ${theme === "light" ? "bg-slate-100" : "bg-slate-950"}`}>
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-14">
+            <p className="slide-kicker">FAQ Snapshot</p>
+            <h2 className={`text-4xl font-black tracking-tight md:text-5xl ${theme === "light" ? "text-slate-950" : "text-white"}`}>자주 묻는 핵심만 먼저</h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className={`rounded-3xl border p-6 ${theme === "light" ? "border-slate-200 bg-white" : "border-white/10 bg-white/[0.04]"}`}>
+              <h3 className="text-lg font-black">AI가 자격을 직접 판단하나요?</h3>
+              <p className={`mt-3 text-sm leading-7 ${theme === "light" ? "text-slate-600" : "text-slate-400"}`}>아닙니다. 자격 판정은 룰 엔진이 하고, AI는 결과를 쉽게 풀어주는 역할만 합니다.</p>
+            </div>
+            <div className={`rounded-3xl border p-6 ${theme === "light" ? "border-slate-200 bg-white" : "border-white/10 bg-white/[0.04]"}`}>
+              <h3 className="text-lg font-black">예상 경쟁률은 진짜 숫자인가요?</h3>
+              <p className={`mt-3 text-sm leading-7 ${theme === "light" ? "text-slate-600" : "text-slate-400"}`}>아닙니다. 단지 비교를 돕는 보조 지표입니다. 실제 경쟁률은 청약홈과 공식 공고문을 기준으로 확인해야 합니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={`slide-section px-8 py-28 transition-colors duration-500 ${theme === "light" ? "bg-white" : "bg-slate-900"}`}>
+        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="slide-kicker">Why This Exists</p>
+            <h2 className={`text-4xl font-black tracking-tight md:text-5xl ${theme === "light" ? "text-slate-950" : "text-white"}`}>
+              청약 정보를
+              <span className="block text-cyan-400">한 번에 읽히게</span>
+            </h2>
+          </div>
+          <div className={`rounded-3xl border p-8 ${theme === "light" ? "border-slate-200 bg-slate-50" : "border-white/10 bg-white/[0.04]"}`}>
+            <p className={`text-sm leading-7 ${theme === "light" ? "text-slate-600" : "text-slate-300"}`}>
+              이 서비스는 사용자가 “나한테 맞는 청약이 뭔지”를 빠르게 좁히도록 돕는 정보 도구입니다. 단순히 가능/불가만 보여주는 대신, 왜 그렇게 나왔는지 이유를 함께 보여 주기 때문에 결과를 이해하고 다음 행동으로 이어가기 쉽습니다.
+            </p>
+            <p className={`mt-4 text-sm leading-7 ${theme === "light" ? "text-slate-600" : "text-slate-300"}`}>
+              메인 화면에서는 단지 목록, 자격 시뮬레이션, 추천 결과, 가이드 글을 한 흐름으로 연결해 두었습니다. 사용자는 공고를 보고, 조건을 입력하고, 추천 전형을 읽고, 필요하면 청약홈 공식 모집공고문으로 이동할 수 있습니다.
+            </p>
+            <p className={`mt-4 text-sm leading-7 ${theme === "light" ? "text-slate-600" : "text-slate-300"}`}>
+              이렇게 구성한 이유는 검색엔진뿐 아니라 실제 사용자가 봐도 “이 사이트가 무엇을 도와주는지”가 바로 보이게 하려는 것입니다.
+            </p>
+          </div>
         </div>
       </section>
 

@@ -1,4 +1,4 @@
-﻿import type { HousingType, SupplyType } from "@/lib/eligibility/types";
+import type { HousingType, SupplyType } from "../eligibility/types";
 
 export type RecruitmentStatus = "upcoming" | "open" | "closed";
 

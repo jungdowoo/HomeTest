@@ -18,17 +18,53 @@ export default function AboutPage() {
           </p>
         </section>
 
+        <section className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-3xl border border-white/5 bg-white/[0.03] p-6">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-cyan-400">01</p>
+            <h3 className="mt-3 text-lg font-black">룰 기반 판정</h3>
+            <p className="mt-3 text-sm leading-relaxed opacity-75">
+              자격 여부는 AI가 추측하지 않고, 조건별 규칙으로 계산합니다. 그래서 결과가 왜 나왔는지 설명하기 쉽고, 나중에 테스트나 규칙 변경도 관리하기 좋습니다.
+            </p>
+          </div>
+          <div className="rounded-3xl border border-white/5 bg-white/[0.03] p-6">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-cyan-400">02</p>
+            <h3 className="mt-3 text-lg font-black">추천 엔진 분리</h3>
+            <p className="mt-3 text-sm leading-relaxed opacity-75">
+              판정과 추천은 같은 로직이 아닙니다. 이 프로젝트는 가능한 전형을 구한 뒤, 단지 공급 유형과 사용자 조건을 함께 고려해 추천 순서를 따로 계산합니다.
+            </p>
+          </div>
+          <div className="rounded-3xl border border-white/5 bg-white/[0.03] p-6">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-cyan-400">03</p>
+            <h3 className="mt-3 text-lg font-black">AI는 설명만</h3>
+            <p className="mt-3 text-sm leading-relaxed opacity-75">
+              AI는 계산 결과를 쉬운 말로 풀어주는 역할만 담당합니다. 정책성 판단을 직접 맡기지 않기 때문에, 비용과 위험을 함께 줄일 수 있습니다.
+            </p>
+          </div>
+        </section>
+
         <section className="grid gap-8 md:grid-cols-2">
           <div className="rounded-3xl border border-white/5 bg-white/[0.03] p-8">
             <h3 className="text-xl font-black text-cyan-400">Rule Engine</h3>
             <p className="mt-4 text-sm leading-relaxed opacity-70">
               청약 자격 판정은 AI가 직접 하지 않습니다. 조건 비교와 가능·주의·불가 판정은 타입이 정의된 룰 엔진에서 수행합니다. 이 구조는 결과의 근거를 추적하기 쉽고 테스트할 수 있습니다.
             </p>
+            <p className="mt-4 text-sm leading-relaxed opacity-70">
+              룰 버전, 기준일, 출처 메모를 함께 두기 때문에 나중에 Supabase나 JSON 관리로 옮길 때도 구조를 유지하기 쉽습니다.
+            </p>
+            <p className="mt-4 text-sm leading-relaxed opacity-70">
+              공개 페이지에서 바로 읽히는 설명을 늘려 둔 이유도 여기에 있습니다. 심사자 입장에서 “이 서비스가 왜 필요한지”와 “무엇이 자동 판단이 아닌지”가 빠르게 보이면 전체 신뢰도가 좋아집니다.
+            </p>
           </div>
           <div className="rounded-3xl border border-white/5 bg-white/[0.03] p-8">
             <h3 className="text-xl font-black text-cyan-400">AI Explanation</h3>
             <p className="mt-4 text-sm leading-relaxed opacity-70">
               AI는 룰 엔진과 추천 엔진이 계산한 결과를 쉬운 문장으로 설명하는 역할만 담당합니다. 중요한 정책성 판단을 LLM에게 직접 맡기지 않기 위한 설계입니다.
+            </p>
+            <p className="mt-4 text-sm leading-relaxed opacity-70">
+              같은 입력과 같은 결과에 대해 설명을 캐싱하기 쉽기 때문에, 비용을 아끼면서도 사용자가 버튼을 눌렀을 때만 AI를 호출하는 구조를 유지할 수 있습니다.
+            </p>
+            <p className="mt-4 text-sm leading-relaxed opacity-70">
+              앞으로는 Supabase로 룰 버전과 설명 캐시를 저장하고, OpenAI API를 붙여도 이 구조를 그대로 유지할 수 있게 설계했습니다.
             </p>
           </div>
         </section>
@@ -40,6 +76,7 @@ export default function AboutPage() {
             <li>정책과 법령성 정보는 자동으로 단정하지 않고, 룰 버전과 기준일을 표시할 수 있는 구조로 관리합니다.</li>
             <li>예상 경쟁 강도는 실제 경쟁률 예측이 아니라 사용자 비교를 돕는 보조 지표입니다.</li>
             <li>개인정보를 서버에 저장하지 않는 MVP 구조를 우선합니다.</li>
+            <li>샘플 룰과 샘플 단지는 데모용이며, 실제 운영 시에는 공고 데이터와 관리자 규칙으로 교체할 수 있게 설계합니다.</li>
           </ul>
         </section>
       </div>

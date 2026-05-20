@@ -1,7 +1,7 @@
-﻿import type { ApartmentOffering } from "@/lib/apartments/types";
-import { sampleRules } from "@/lib/eligibility/sampleRules";
-import { evaluateEligibility } from "@/lib/eligibility/engine";
-import type { ApplicantProfile, EligibilityResult, EligibilityStatus, SupplyType } from "@/lib/eligibility/types";
+import type { ApartmentOffering } from "../apartments/types";
+import { sampleRules } from "../eligibility/sampleRules";
+import { evaluateEligibility } from "../eligibility/engine";
+import type { ApplicantProfile, EligibilityResult, EligibilityStatus, SupplyType } from "../eligibility/types";
 import { estimateCompetition, type CompetitionEstimate } from "./competitionEstimator";
 
 export type ConfidenceLevel = "high" | "medium" | "low";

@@ -1,8 +1,8 @@
-﻿import { describe, expect, it } from "vitest";
-import type { ApartmentOffering } from "@/lib/apartments/types";
-import { evaluateEligibility } from "@/lib/eligibility/engine";
-import type { ApplicantProfile } from "@/lib/eligibility/types";
-import { createRecommendations } from "@/lib/recommendation/recommendationEngine";
+import { describe, expect, it } from "vitest";
+import type { ApartmentOffering } from "../lib/apartments/types";
+import { evaluateEligibility } from "../lib/eligibility/engine";
+import type { ApplicantProfile } from "../lib/eligibility/types";
+import { createRecommendations } from "../lib/recommendation/recommendationEngine";
 
 const baseProfile: ApplicantProfile = {
   age: 34,
