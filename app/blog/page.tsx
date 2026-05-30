@@ -10,6 +10,15 @@ export const metadata: Metadata = {
 };
 
 export default function BlogListingPage() {
+  const featuredPosts = [
+    "cheongyak-beginner-roadmap",
+    "announcement-reading-guide",
+    "special-supply-type-map",
+    "common-mistakes-before-apply",
+  ]
+    .map((slug) => blogPosts.find((post) => post.slug === slug))
+    .filter((post): post is (typeof blogPosts)[number] => Boolean(post));
+
   return (
     <InfoPageLayout title="청약 가이드와 전략 글" subtitle="Blog & Insights">
       <div className="mb-12 rounded-3xl border border-cyan-500/20 bg-cyan-500/10 p-8 text-sm leading-7 text-cyan-50">
@@ -20,6 +29,42 @@ export default function BlogListingPage() {
           실제 신청 가능 여부, 소득·자산 기준, 접수 일정은 반드시 청약홈과 모집공고문을 기준으로 확인해야 합니다. 글마다 핵심 요약과 전략 포인트를 먼저 볼 수 있게 구성했습니다.
         </p>
       </div>
+
+      <section className="mb-12 rounded-[2rem] border border-white/5 bg-white/[0.03] p-8 md:p-10">
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-400">Start Here</p>
+        <h2 className="mt-4 text-3xl font-black">처음 방문했다면 이 순서로 읽어보세요</h2>
+        <p className="mt-4 max-w-3xl text-sm leading-8 text-slate-300">
+          이 블로그는 단순 뉴스 모음이 아니라 청약을 처음 준비하는 사람이 조건, 공고문, 전형, 서류를 차례로 이해하도록 만든 콘텐츠 허브입니다. 아래 글들은 재방문자가 가장 먼저 읽어도 좋은 핵심 글입니다.
+        </p>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {featuredPosts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="rounded-2xl border border-cyan-500/10 bg-cyan-500/5 p-6 transition hover:border-cyan-500/40 hover:bg-cyan-500/10"
+            >
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-cyan-400">{post.category}</span>
+              <h3 className="mt-3 text-lg font-black leading-tight">{post.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-slate-400">{post.excerpt}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mb-12 grid gap-4 md:grid-cols-3">
+        <div className="rounded-3xl border border-white/5 bg-white/[0.03] p-6">
+          <h2 className="text-lg font-black text-cyan-400">초보자 흐름</h2>
+          <p className="mt-3 text-sm leading-7 text-slate-400">용어, 준비 순서, 공고문 읽기처럼 처음 막히는 지점을 먼저 설명합니다.</p>
+        </div>
+        <div className="rounded-3xl border border-white/5 bg-white/[0.03] p-6">
+          <h2 className="text-lg font-black text-cyan-400">조건별 전략</h2>
+          <p className="mt-3 text-sm leading-7 text-slate-400">무주택, 혼인, 자녀, 통장, 소득·자산 입력값이 결과에 어떻게 이어지는지 다룹니다.</p>
+        </div>
+        <div className="rounded-3xl border border-white/5 bg-white/[0.03] p-6">
+          <h2 className="text-lg font-black text-cyan-400">신청 전 점검</h2>
+          <p className="mt-3 text-sm leading-7 text-slate-400">공식 모집공고문, 서류, 일정, 주의 문구를 실제 행동으로 연결하는 방법을 정리합니다.</p>
+        </div>
+      </section>
 
       <div className="grid gap-8">
         {blogPosts.map((post) => (

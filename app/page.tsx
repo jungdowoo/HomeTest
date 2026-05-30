@@ -25,6 +25,12 @@ const filterTabs = ["전체", "접수 중", "모집 예정"] as const;
 
 type FilterTab = (typeof filterTabs)[number];
 const recentGuides = blogPosts.slice(-5).reverse();
+const contentHubGuides = [
+  "cheongyak-beginner-roadmap",
+  "cheongyak-terms-glossary",
+  "announcement-reading-guide",
+  "special-supply-type-map",
+].map((slug) => blogPosts.find((post) => post.slug === slug)).filter((post): post is (typeof blogPosts)[number] => Boolean(post));
 
 export default function Home() {
   const [profile, setProfile] = useState<ApplicantProfile | null>(null);
@@ -277,6 +283,27 @@ export default function Home() {
               <h3 className="text-lg font-black">예상 경쟁률은 진짜 숫자인가요?</h3>
               <p className={`mt-3 text-sm leading-7 ${theme === "light" ? "text-slate-600" : "text-slate-400"}`}>아닙니다. 단지 비교를 돕는 보조 지표입니다. 실제 경쟁률은 청약홈과 공식 공고문을 기준으로 확인해야 합니다.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={`slide-section px-8 py-28 transition-colors duration-500 ${theme === "light" ? "bg-white" : "bg-slate-900"}`}>
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-14">
+            <p className="slide-kicker">Content Hub</p>
+            <h2 className={`text-4xl font-black tracking-tight md:text-5xl ${theme === "light" ? "text-slate-950" : "text-white"}`}>처음 보는 사람을 위한 읽는 순서</h2>
+            <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-500">
+              청약비서는 시뮬레이터만 제공하지 않습니다. 용어, 공고문 읽기, 특별공급 비교, 신청 전 체크까지 이어지는 글을 함께 제공해 사용자가 결과를 스스로 해석할 수 있게 돕습니다.
+            </p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {contentHubGuides.map((post) => (
+              <a key={post.slug} href={`/blog/${post.slug}`} className={`rounded-3xl border p-6 transition hover:border-cyan-400/50 ${theme === "light" ? "border-slate-200 bg-slate-50" : "border-white/10 bg-white/[0.04]"}`}>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-cyan-400">{post.category}</span>
+                <h3 className="mt-4 text-lg font-black leading-tight">{post.title}</h3>
+                <p className={`mt-4 text-sm leading-7 ${theme === "light" ? "text-slate-600" : "text-slate-400"}`}>{post.excerpt}</p>
+              </a>
+            ))}
           </div>
         </div>
       </section>
