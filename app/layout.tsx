@@ -4,7 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT?.trim();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

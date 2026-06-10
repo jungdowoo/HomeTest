@@ -36,7 +36,6 @@ export default function Home() {
   const [profile, setProfile] = useState<ApplicantProfile | null>(null);
   const [result, setResult] = useState<RecommendationResult | null>(null);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
-  const [mounted, setMounted] = useState(false);
   const [apartments, setApartments] = useState<ApartmentOffering[]>([]);
   const [loadingApartments, setLoadingApartments] = useState(true);
   const [filterTab, setFilterTab] = useState<FilterTab>("전체");
@@ -51,7 +50,6 @@ export default function Home() {
   }, [apartments, filterTab]);
 
   useEffect(() => {
-    setMounted(true);
     const savedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
     if (savedTheme) setTheme(savedTheme);
   }, []);
@@ -79,9 +77,7 @@ export default function Home() {
     }, 100);
   }
 
-  const themeClass = mounted && theme === "light" ? "light bg-white text-slate-950" : "bg-[#020617] text-white";
-
-  if (!mounted) return null;
+  const themeClass = theme === "light" ? "light bg-white text-slate-950" : "bg-[#020617] text-white";
 
   return (
     <main className={`min-h-screen transition-colors duration-500 ${themeClass}`}>

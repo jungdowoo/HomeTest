@@ -4,7 +4,7 @@ import { sampleRules } from "@/lib/eligibility/sampleRules";
 
 export const metadata: Metadata = {
   title: "룰 미리보기",
-  description: "청약 전형 룰 구조를 확인하는 내부 미리보기 페이지입니다.",
+  description: "청약 전형별 샘플 룰 구조를 확인하는 개발자용 미리보기 페이지입니다.",
   robots: {
     index: false,
     follow: false,
@@ -24,7 +24,8 @@ export default function RulesPreviewPage() {
         <p className="mt-8 text-xs font-black uppercase tracking-[0.18em] text-cyan-800">Rules Preview</p>
         <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950">룰 미리보기</h1>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600">
-          이 페이지는 관리자용 또는 개발자용으로 룰 구조를 확인하기 위한 미리보기 화면입니다. 실제 사용자에게 노출되는 핵심 가치는 메인 시뮬레이터와 정보 페이지에 집중되어야 하므로, 이 화면은 검색 노출용 콘텐츠로 보지 않도록 정리했습니다.
+          이 페이지는 관리자 또는 개발자가 샘플 룰 구조를 확인하기 위한 보조 화면입니다. 실제 사용자에게는
+          메인 시뮬레이터와 가이드 페이지를 중심으로 정보를 제공합니다.
         </p>
         <div className="mt-6 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm leading-7 text-amber-950">
           <p className="font-bold">미리보기에서 확인할 항목</p>
@@ -41,7 +42,7 @@ export default function RulesPreviewPage() {
                 <h2 className="text-xl font-black text-slate-950">{rule.label}</h2>
                 <span className="rounded-full bg-slate-950 px-3 py-1 text-xs font-bold text-white">{rule.ruleVersion}</span>
               </div>
-              <p className="mt-2 text-sm text-slate-500">기준일: {rule.effectiveDate}</p>
+              <p className="mt-2 text-sm text-slate-500">기준일 {rule.effectiveDate}</p>
               <ul className="mt-5 grid gap-2 text-sm text-slate-700 md:grid-cols-2">
                 {rule.conditions.map((condition) => (
                   <li key={`${rule.supplyType}-${condition.field}-${condition.operator}`} className="rounded-xl bg-slate-50 px-4 py-3">
