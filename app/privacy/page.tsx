@@ -28,7 +28,10 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="mb-4 text-xl font-black text-white">4. 쿠키 및 광고 고지</h2>
-          <p>서비스는 향후 Google AdSense 등 광고 서비스를 사용할 수 있습니다. 광고 제공자는 쿠키를 사용해 사용자에게 더 관련성 높은 광고를 표시할 수 있습니다. 사용자는 브라우저 설정 또는 Google 광고 설정에서 맞춤형 광고를 관리할 수 있습니다.</p>
+          <p>서비스는 Google AdSense 광고 코드를 사용할 수 있습니다. Google 및 제3자 광고 공급업체는 쿠키를 사용해 사용자의 이전 방문 기록 또는 다른 웹사이트 방문 정보를 바탕으로 광고를 게재할 수 있습니다.</p>
+          <p className="mt-4">Google의 광고 쿠키 사용은 Google과 파트너가 본 사이트 또는 인터넷상의 다른 사이트 방문 정보를 바탕으로 사용자에게 맞춤 광고를 표시하는 데 사용될 수 있습니다.</p>
+          <p className="mt-4">사용자는 <a className="text-cyan-300 underline" href="https://adssettings.google.com/" target="_blank" rel="noreferrer">Google 광고 설정</a>에서 맞춤 광고를 관리하거나 거부할 수 있습니다. 또한 브라우저 설정에서 쿠키 저장을 제한하거나 삭제할 수 있습니다.</p>
+          <p className="mt-4">제3자 광고 네트워크 또는 광고 공급업체가 사용되는 경우 해당 업체의 쿠키가 광고 게재에 사용될 수 있으며, 사용자는 각 업체가 제공하는 선택 도구 또는 <a className="text-cyan-300 underline" href="https://www.aboutads.info/choices/" target="_blank" rel="noreferrer">aboutads.info</a>와 같은 선택 도구를 통해 일부 맞춤 광고 사용을 관리할 수 있습니다.</p>
         </section>
 
         <section>
@@ -41,7 +44,12 @@ export default function PrivacyPage() {
           <p>개인정보 처리와 관련한 문의는 문의 페이지 또는 이메일을 통해 접수할 수 있습니다.</p>
         </section>
 
-        <div className="mt-20 border-t border-white/5 pt-10 text-[11px] opacity-50">최종 수정일: 2026년 5월 10일</div>
+        <section>
+          <h2 className="mb-4 text-xl font-black text-white">7. 정책 변경 안내</h2>
+          <p>서비스 구조, 광고 제공 방식, 개인정보 처리 방식이 변경되면 본 개인정보처리방침을 갱신합니다. 중요한 변경이 있는 경우 페이지 내 고지 또는 별도 안내를 통해 변경 내용을 확인할 수 있도록 하겠습니다.</p>
+        </section>
+
+        <div className="mt-20 border-t border-white/5 pt-10 text-[11px] opacity-50">최종 수정일: 2026년 7월 2일</div>
       </div>
     </InfoPageLayout>
   );

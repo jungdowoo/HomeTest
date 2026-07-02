@@ -79,6 +79,37 @@ export default function AboutPage() {
             <li>샘플 룰과 샘플 단지는 데모용이며, 실제 운영 시에는 공고 데이터와 관리자 규칙으로 교체할 수 있게 설계합니다.</li>
           </ul>
         </section>
+
+        <section className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-3xl border border-white/5 bg-white/[0.03] p-8">
+            <h2 className="text-2xl font-black">콘텐츠 검수 기준</h2>
+            <p className="mt-4 text-sm leading-7 opacity-75">
+              청약비서의 가이드 글은 사용자가 청약 정보를 처음 읽을 때 헷갈리기 쉬운 지점을 설명하는 데 초점을 둡니다. 특정 단지의 실제 신청 가능 여부를 확정하지 않고, 공식 모집공고문에서 확인해야 할 항목을 먼저 정리합니다.
+            </p>
+            <p className="mt-4 text-sm leading-7 opacity-75">
+              정책성 문장은 확정 표현을 피하고, 조건·서류·일정·지역 기준처럼 사용자가 직접 확인해야 하는 항목을 분리해 작성합니다. 잘못된 단정이 생기지 않도록 “가능”, “주의”, “불가”의 의미도 서비스 전반에서 반복 안내합니다.
+            </p>
+          </div>
+          <div className="rounded-3xl border border-white/5 bg-white/[0.03] p-8">
+            <h2 className="text-2xl font-black">출처와 업데이트 방식</h2>
+            <p className="mt-4 text-sm leading-7 opacity-75">
+              단지 정보는 청약홈 API 또는 데모 샘플 데이터를 기반으로 노출되며, 실제 신청 전에는 청약홈과 해당 단지 모집공고문을 다시 확인해야 합니다. 샘플 데이터는 사용 흐름을 보여주기 위한 데모 자료로 실제 공고와 구분합니다.
+            </p>
+            <p className="mt-4 text-sm leading-7 opacity-75">
+              룰 엔진은 ruleVersion, 기준일, 출처 메모를 포함할 수 있는 구조로 설계되어 있습니다. 제도나 공고 기준이 변경되면 자동으로 단정하지 않고, 개발자 또는 관리자가 룰을 검토해 반영하는 방식을 전제로 합니다.
+            </p>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-cyan-500/20 bg-cyan-500/10 p-8">
+          <h2 className="text-2xl font-black text-cyan-300">운영자 정보와 문의</h2>
+          <p className="mt-4 text-sm leading-7 opacity-80">
+            청약비서는 개인 프로젝트로 시작한 청약 정보 탐색 도구이며, 서비스 오류 제보와 콘텐츠 수정 요청은 문의 페이지를 통해 받을 수 있습니다. 사용자가 더 정확한 정보를 찾을 수 있도록 피드백을 바탕으로 가이드와 룰 구조를 지속적으로 개선합니다.
+          </p>
+          <p className="mt-4 text-sm leading-7 opacity-80">
+            문의, 오류 제보, 광고 및 제휴 관련 연락은 <a className="font-bold text-cyan-300 underline" href="/contact">문의하기</a> 페이지에서 확인할 수 있습니다.
+          </p>
+        </section>
       </div>
     </InfoPageLayout>
   );
